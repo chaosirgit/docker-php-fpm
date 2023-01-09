@@ -1,4 +1,4 @@
-# Docker PHP-FPM
+# PHP-FPM Docker Image with Redis and Swoole Extension
 
 This Dockerfile is based on the official [bitnami/php-fpm:8.1](https://hub.docker.com/r/bitnami/php-fpm) image and adds the [Redis](https://pecl.php.net/package/redis) and [Swoole](https://pecl.php.net/package/swoole) extensions.
 
