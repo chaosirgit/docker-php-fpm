@@ -1,5 +1,7 @@
 FROM bitnami/php-fpm:8.1
 
+ENV ROOT_DIR="/app/public"
+
 # Install autoconf
 RUN apt-get update && apt-get -y install autoconf nginx
 
@@ -18,6 +20,13 @@ RUN pecl install swoole
 # Enable extension
 RUN echo "extension=redis.so" >> /opt/bitnami/php/etc/php.ini
 RUN echo "extension=swoole.so" >> /opt/bitnami/php/etc/php.ini
+
+# Nginx conf
+COPY conf/nginx.conf /etc/nginx/nginx.conf
+
+COPY conf/nginx /etc/nginx/conf.d
+
+RUN sed -i 's/root_dir/$ROOT_DIR/g' /etc/nginx/conf.d/php_default.conf
 
 EXPOSE 80
 
