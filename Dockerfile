@@ -26,8 +26,6 @@ COPY conf/nginx.conf /etc/nginx/nginx.conf
 
 COPY conf/nginx /etc/nginx/conf.d
 
-RUN sed -i 's/root_dir/$ROOT_DIR/g' /etc/nginx/conf.d/php_default.conf
-
 EXPOSE 80
 
-ENTRYPOINT ["/bin/bash","-c","php-fpm --pid /opt/bitnami/php/tmp/php-fpm.pid -y /opt/bitnami/php/etc/php-fpm.conf && nginx -g 'daemon off;'"]
+ENTRYPOINT ["/bin/bash","-c","sed -i 's/root_dir/$ROOT_DIR/g' /etc/nginx/conf.d/php_default.conf && php-fpm --pid /opt/bitnami/php/tmp/php-fpm.pid -y /opt/bitnami/php/etc/php-fpm.conf && nginx -g 'daemon off;'"]
