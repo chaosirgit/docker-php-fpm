@@ -1,6 +1,7 @@
 FROM bitnami/php-fpm:8.1
 
-ENV ROOT_DIR="/app/public"
+ENV ROOT_DIR "/app/public"
+ENV WORK_CONNECTIONS 2048
 
 # Install autoconf
 RUN apt-get update && apt-get -y install autoconf nginx
@@ -28,4 +29,8 @@ COPY conf/nginx /etc/nginx/conf.d
 
 EXPOSE 80
 
-ENTRYPOINT ["/bin/bash","-c","sed -i 's/root_dir/$ROOT_DIR/g' /etc/nginx/conf.d/php_default.conf && php-fpm --pid /opt/bitnami/php/tmp/php-fpm.pid -y /opt/bitnami/php/etc/php-fpm.conf && nginx -g 'daemon off;'"]
+COPY start.sh /start.sh
+
+RUN chmod +x /start.sh
+
+CMD ["/start.sh"]
