@@ -4,7 +4,7 @@ ENV ROOT_DIR "/app/public"
 ENV WORK_CONNECTIONS 2048
 
 # Install autoconf
-RUN apt-get update && apt-get -y install autoconf nginx
+RUN apt-get update && apt-get -y install autoconf nginx && apt-get install -y git
 
 # set PHP_AUTOCONF
 ENV PHP_AUTOCONF="/usr/bin/autoconf"
