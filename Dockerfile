@@ -1,7 +1,7 @@
 FROM bitnami/php-fpm:8.1
 
 # Install autoconf
-RUN apt-get update && apt-get -y install autoconf
+RUN apt-get update && apt-get -y install autoconf && apt-get install -y git
 
 # set PHP_AUTOCONF
 ENV PHP_AUTOCONF="/usr/bin/autoconf"
